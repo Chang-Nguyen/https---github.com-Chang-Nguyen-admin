@@ -1,0 +1,35 @@
+{% extends "body.html" %}
+{% block content %}
+<div class="content">
+    <h2>Quản lý đánh giá sản phẩm</h2>
+
+    <table class="tables" style="margin-top: 100px;">
+      <thead>
+        <tr>
+          <th scope="col" style="padding: 20px 100px 20px 100px; white-space: nowrap;">Họ tên</th>
+          <th scope="col" style="padding: 20px 50px 20px 50px; white-space: nowrap;">Sao</th>
+          <th scope="col" style="padding: 20px 100px 20px 100px; white-space: nowrap;">Nội dung</th>
+          <th scope="col" style="padding: 20px 20px 20px 20px;text-align: center; white-space: nowrap;">Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for ab in reviews %}
+            <tr>
+              <td style="vertical-align: middle;">{{ ab['name'] }}</td>
+              <td style="vertical-align: middle;">{{ ab['star'] }}</td>
+              <td style="vertical-align: middle;">{{ ab['note'] }}</td>
+              <td style="vertical-align: middle;">
+                  <form method="POST" 
+                          action="{{ url_for('delete_reviews', id=ab['_id']) }}">
+                  <input class="btn-danger"
+                          type="submit"
+                          value="Delete"
+                          onclick="return confirm('Bạn có chắc muốn xóa không?')"/>
+                  </form>
+              </td>
+            </tr>	
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock %} 

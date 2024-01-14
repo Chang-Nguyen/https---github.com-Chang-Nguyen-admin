@@ -1,0 +1,62 @@
+{% extends "body.html" %}
+{% block content %}
+    <div class="content">
+        <form method="POST" enctype="multipart/form-data">
+            <p>
+                <b><label id='content'> Thêm Tin tức</label></b>
+            </p>
+            <div style="display: flex; flex-direction: column;">
+                <div style=" display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+                  <label htmlFor="blog_name" style="color: black;">Tên tin tức</label>
+                  <input type="text" className="form-control" id="blog_name" name="blog_name" style="width: 80%;" />
+                </div>
+      
+                <div style=" display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+                  <label htmlFor="blog_info" style="color: black;">Mô tả:</label>
+                  <input type="text" className="form-control" id="blog_info" name="blog_info" style="width: 80%;" />
+    
+                </div>
+
+                <div style=" display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+                    <label htmlFor="blog_img" style="color: black;">Hình ảnh:</label>
+                    <input type="file" className="form-control" id="blog_img" name="blog_img" style="width: 80%;" />
+                  </div>  
+            <button type="submit">Submit</button>
+        </form>
+
+        <table class="tables" style="margin-top: 100px;">
+          <thead>
+            <tr>
+              <!-- <th scope="col" style="padding: 40px 40px 40px 40px;">id</th> -->
+              <th scope="col" style="padding: 10px 40px 10px 40px; white-space: nowrap;">Tên tin tức</th>
+              <th scope="col" style="padding: 10px 40px 10px 40px; white-space: nowrap;">Mô tả</th>
+              <th scope="col" style="padding: 10px 40px 10px 40px; white-space: nowrap;">Ảnh</th>
+              <th scope="col" style="padding: 10px 40px 10px 40px; white-space: nowrap;">Tùy chỉnh</th>
+
+    
+            </tr>
+          </thead>
+          <tbody>
+              {% for ab in blog %}
+                <tr>
+                  <!-- <td style="line-height: 300px;">{{ ab['_id'] }}</td> -->
+                  <td style="line-height: 300px;">{{ ab['blog_name'] }}</td>
+                  <td style="line-height: 300px;">{{ ab['blog_info'] }}</td>
+                  <td style="line-height: 300px;"> 
+                    <img src="{{ blog.blog_img1 }}" style="height: 150px; width: 250px;"></td>
+                  <td style="vertical-align: middle;">
+                      <form method="POST" 
+                              action="{{ url_for('delete_blog', id=ab['_id']) }}">
+                      <input class="btn-danger"
+                              type="submit"
+                              value="Delete"
+                              onclick="return confirm('Bạn có chắc muốn xóa không?')"/>
+                      </form>
+                  </td>
+                </tr>	
+            {% endfor %}
+          </tbody>
+        </table>
+
+    </div> 
+{% endblock %} 

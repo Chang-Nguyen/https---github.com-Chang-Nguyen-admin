@@ -1,0 +1,102 @@
+{% extends "body.html" %}
+{% block content %}
+<div class="content">
+    <!-- <form method="POST" enctype="multipart/form-data">
+        <p>
+            <b><label id='content'>Đặt Bàn</label></b>
+        </p>
+        <div style="display: flex; flex-direction: column;">
+            <div style=" display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+              <label htmlFor="name" style="color: black;">Họ và tên</label>
+              <input type="text" className="form-control" id="name" name="name" style="width: 80%;" />
+            </div>
+  
+            <div style=" display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+              <label htmlFor="phone" style="color: black;">Số điện thoại</label>
+              <input type="text" className="form-control" id="phone" name="phone" style="width: 80%;" />
+            </div>
+  
+            <div style=" display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+              <label htmlFor="date" style="color: black;">Ngày</label>
+              <input type="date" className="form-control" id="date" name="date" style="width: 80%;" />
+
+            </div>
+  
+            <div style=" display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+              <label htmlFor="time" style="color: black;">Giờ</label>
+              <input type="time" className="form-control" id="time" name="time" style="width: 80%;" />
+            </div>
+  
+            <div style=" display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+              <label htmlFor="facility" style="color: black;">Chọn cơ sở</label>
+              <select className="form-control" id="facility" name="facility" style="width: 80%;" d>
+                <option value="">Chọn cơ sở</option>
+                <option value="">Chuchu Nguyễn Trãi - Hà Nội</option>
+                <option value="">ChuChu Xuân Thủy - Hà Nội</option>
+                <option value="">ChuChu Nguyễn Cảnh Chân - Hồ Chí Minh</option>
+                <option value="">ChuChu An Phú - Hồ Chí Minh</option>
+              </select>
+            </div>
+  
+            <div style=" display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+              <label htmlFor="adults" style="color: black;">Người lớn</label>
+              <input type="number" className="form-control" id="adults" name="adults" style="width: 80%;" />
+            </div>
+  
+            <div style=" display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+              <label htmlFor="children" style="color: black;">Trẻ em</label>
+              <input type="number" className="form-control" id="children" name="children" style="width: 80%;" />
+            </div>
+  
+            <div style=" display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+              <label htmlFor="note" style="color: black;">Ghi chú</label>
+              <textarea className="form-control" id="note" name="note" style="width: 80%;"></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </div>
+    </form> -->
+    <h2>Quản lý thông tin đặt bàn</h2>
+
+    <table class="tables" style="margin-top: 100px;">
+      <thead>
+        <tr>
+          <!-- <th  scope="col" style="padding: 20px 100px 20px 100px;">id</th> -->
+          <th scope="col" style="padding: 20px 100px 20px 100px; white-space: nowrap;">Họ tên</th>
+          <th scope="col" style="padding: 20px 50px 20px 50px; white-space: nowrap;">SĐT</th>
+          <th scope="col" style="padding: 20px 100px 20px 100px; white-space: nowrap;">Ngày</th>
+          <th scope="col" style="padding: 20px 100px 20px 100px; white-space: nowrap;">Giờ</th>
+          <th scope="col" style="padding: 20px 100px 20px 100px; white-space: nowrap;">Cơ sở</th>
+          <th scope="col" style="padding: 20px 20px 20px 20px;text-align: center; white-space: nowrap;">Hành động</th>
+          <!-- <th scope="col" style="padding: 0 40px 40px 40px;">SL người lớn</th>
+          <th scope="col" style="padding: 0 40px 40px 40px;">SL trẻ em</th>
+          <th scope="col" style="padding: 0 40px 40px 40px;">Ghi chú</th> -->
+        </tr>
+      </thead>
+      <tbody>
+          {% for ab in book %}
+            <tr>
+              <!-- <td style="vertical-align: middle;">{{ ab['_id'] }}</td> -->
+              <td style="vertical-align: middle;">{{ ab['name'] }}</td>
+              <td style="vertical-align: middle;">{{ ab['phone'] }}</td>
+              <td style="vertical-align: middle;">{{ ab['date'] }}</td>
+              <td style="vertical-align: middle;">{{ ab['time'] }}</td>
+              <td style="vertical-align: middle;">{{ ab['facility'] }}</td>
+              <!-- <td style="vertical-align: middle;">{{ ab['adults'] }}</td>
+              <td style="vertical-align: middle;">{{ ab['children'] }}</td>
+              <td style="vertical-align: middle;">{{ ab['note'] }}</td> -->
+
+              <td style="vertical-align: middle;">
+                  <form method="POST" 
+                          action="{{ url_for('delete_book', id=ab['_id']) }}">
+                  <input class="btn-danger"
+                          type="submit"
+                          value="Delete"
+                          onclick="return confirm('Bạn có chắc muốn xóa không?')"/>
+                  </form>
+              </td>
+            </tr>	
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock %} 

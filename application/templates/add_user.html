@@ -1,0 +1,41 @@
+{% extends "body.html" %}
+{% block content %}
+<div class="content">
+    <h2>Quản lý thông tin khách hàng</h2>
+
+    <table class="tables" style="margin-top: 100px;">
+      <thead>
+        <tr>
+          <th scope="col" style="padding: 20px 100px 20px 100px; white-space: nowrap;">Họ tên</th>
+          <th scope="col" style="padding: 20px 50px 20px 50px; white-space: nowrap;">SĐT</th>
+          <th scope="col" style="padding: 20px 100px 20px 100px; white-space: nowrap;">Tỉnh</th>
+          <th scope="col" style="padding: 20px 100px 20px 100px; white-space: nowrap;">Địa chỉ</th>
+          <th scope="col" style="padding: 20px 100px 20px 100px; white-space: nowrap;">Thanh toán</th>
+          <th scope="col" style="padding: 20px 20px 20px 20px;text-align: center; white-space: nowrap;">Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for ab in user %}
+            <tr>
+              
+              <td style="vertical-align: middle;">{{ ab['name'] }}</td>
+              <td style="vertical-align: middle;">{{ ab['phone'] }}</td>
+              <td style="vertical-align: middle;">{{ ab['city'] }}</td>
+              <td style="vertical-align: middle;">{{ ab['address'] }}</td>
+              <td style="vertical-align: middle;">{{ ab['method_payment'] }}</td>
+
+              <td style="vertical-align: middle;">
+                  <form method="POST" 
+                          action="{{ url_for('delete_user', id=ab['_id']) }}">
+                  <input class="btn-danger"
+                          type="submit"
+                          value="Delete"
+                          onclick="return confirm('Bạn có chắc muốn xóa không?')"/>
+                  </form>
+              </td>
+            </tr>	
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock %} 

@@ -1,0 +1,61 @@
+{% extends "body.html" %}
+{% block content %}
+<div class="content">
+    <form method="POST" enctype="multipart/form-data">
+        <p>
+            <b><label id='content'>Tên Danh Mục</label></b>
+        </p>
+        <p>
+        <input type="text" name="category_name" placeholder="Nhập tên danh mục ...">
+        </p>
+        <!-- <p>
+        <input type="file" name="file" class="form-control" autocomplete="off" required>
+        </p> -->
+        <button type="submit">Submit</button>
+    </form>
+    <hr>
+    <!-- {% for ab in category %}
+		<div class="todo">
+	    Fetching a todo
+		<p> {{ ab['category_name'] }} </p>
+		Deleting a todo
+		<form method="POST"
+			  action="{{ url_for('delete_category', id=ab['_id']) }}">
+		<input
+			  type="submit"
+			  value="delete cartegory"
+			  onclick="return confirm('Are you sure you want to delete this entry?')"/>
+		</form>
+		</div> -->
+
+        <table class="tables">
+            <thead>
+              <tr>
+                <th scope="col">STT</th>
+                <th scope="col">id</th>
+                <th scope="col">Danh mục</th>
+                <th scope="col">Chỉnh sửa</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for ab in category %}
+                  <tr>
+                    <th scope="row">{{ ab[ab] }}</th>
+                    <td>{{ ab['_id'] }}</td>
+                    <td>{{ ab['category_name'] }}</td>
+                    <td>
+                        <form method="POST" 
+                                action="{{ url_for('delete_category', id=ab['_id']) }}">
+                        <input class="btn-danger"
+                                type="submit"
+                                value="delete"
+                                onclick="return confirm('Are you sure you want to delete this entry?')"/>
+                        </form>
+                    </td>
+                  </tr>	
+              {% endfor %}
+            </tbody>
+          </table>
+	<!-- {% endfor %} -->
+</div>
+{% endblock %} 

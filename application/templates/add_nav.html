@@ -1,0 +1,61 @@
+{% extends "body.html" %}
+{% block content %}
+<div class="content">
+    <form method="POST" enctype="multipart/form-data">
+        <p>
+            <b><label id='content'>Nav content</label></b>
+        </p>
+        <p>
+        <input type="text" name="nav_content" placeholder="Nav content...">
+        </p>
+        <!-- <p>
+        <input type="file" name="file" class="form-control" autocomplete="off" required>
+        </p> -->
+        <button type="submit">Submit</button>
+    </form>
+    <hr>
+    <!-- {% for ab in nav %}
+		<div class="todo">
+	    Fetching a todo
+		<p> {{ ab['nav_content'] }} </p>
+		Deleting a todo
+		<form method="POST"
+			  action="{{ url_for('delete_nav', id=ab['_id']) }}">
+		<input
+			  type="submit"
+			  value="delete nav"
+			  onclick="return confirm('Are you sure you want to delete this entry?')"/>
+		</form>
+		</div> -->
+    
+        <table class="table table-striped table-white">
+            <thead>
+              <tr>
+                <th scope="col">STT</th>
+                <th scope="col">id</th>
+                <th scope="col">Danh mục</th>
+                <th scope="col">Chỉnh sửa</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for ab in nav %}
+                  <tr>
+                    <th scope="row">{{ ab[ab] }}</th>
+                    <td>{{ ab['_id'] }}</td>
+                    <td>{{ ab['nav_content'] }}</td>
+                    <td>
+                        <form method="POST" 
+                                action="{{ url_for('delete_nav', id=ab['_id']) }}">
+                        <input class="btn-danger"
+                                type="submit"
+                                value="delete nav"
+                                onclick="return confirm('Are you sure you want to delete this entry?')"/>
+                        </form>
+                    </td>
+                  </tr>	
+              {% endfor %}
+            </tbody>
+          </table>
+	<!-- {% endfor %} -->
+</div>
+{% endblock %} 
